@@ -45,7 +45,7 @@ class HomeController extends Controller
                     ];
                 })->values(),
                 'shares' => $post->shares ?? 0,
-                'views' => $post->views ?? 0,
+                'views' => $post->views->count() ?? 0,
                 'media' => $post->media->map(function ($media) {
                     return [
                         'id' => $media->id,

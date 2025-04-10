@@ -60,9 +60,10 @@ class PostController extends Controller
     public function show(Post $post)
     {
         // Create a view for the post
+        // Create a view for the post
         $post->views()->updateOrCreate(
-            ['user_id' => auth()->id()], // critério de busca
-            ['updated_at' => now()]      // atualizar o timestamp se já existir
+            ['user_id' => auth()->id()], // search criteria
+            ['updated_at' => now()]      // update timestamp if exists
         );
 
         $post->load(['user', 'likes', 'comments.user', 'media']);

@@ -43,6 +43,6 @@ class Post extends Model
 
     public function views()
     {
-        return $this->hasMany(View::class);
+        return $this->morphMany(View::class, 'viewable');
     }
 }

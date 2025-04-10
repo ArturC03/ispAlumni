@@ -273,6 +273,7 @@ export default function Home({ posts }: Props) {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Publicações" />
 
+
             <div className="flex h-full flex-1 flex-col items-center gap-6 p-4 sm:p-6">
                 {/* Dialog para criar publicação */}
                 <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -526,6 +527,7 @@ export default function Home({ posts }: Props) {
                 </Dialog>
 
                 <div className="w-full max-w-[600px] space-y-4 px-4 sm:px-0">
+                    <h1 className="mb-6 text-3xl font-bold">Publicações</h1>
                     {!posts.data || posts.data.length === 0 ? (
                         <Card className="rounded-xl border shadow-sm">
                             <CardContent className="py-12">
@@ -678,7 +680,7 @@ export default function Home({ posts }: Props) {
                                                         <div className="rounded-full p-2 transition-colors group-hover:bg-blue-500/10">
                                                             <Eye className="h-4 w-4" />
                                                         </div>
-                                                        <span className="text-sm font-medium">{post.views.length}</span>
+                                                        <span className="text-sm font-medium">{post.views}</span>
                                                     </div>
                                                 </Button>
                                             </div>

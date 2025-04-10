@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('views');
+
         Schema::create('views', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->morphs('viewable'); // Creates viewable_id and viewable_type columns
             $table->timestamps();
 
-            // Garantir que um usuário só possa curtir um post uma vez
-            $table->unique(['user_id', 'post_id']);
+            // Ensure a user can only view a specific item once in the database
+            // (Note: In practice, you might want to track multiple views with timestamps instead)
+            $table->unique(['user_id', 'viewable_id', 'viewable_type']);
         });
     }
 
@@ -28,5 +31,14 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('views');
+
+        // Recreate the original table structure if needed
+        Schema::create('views', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
+            $table->unique(['user_id', 'post_id']);
+        });
     }
 };
