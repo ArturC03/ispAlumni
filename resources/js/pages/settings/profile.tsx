@@ -22,6 +22,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 type ProfileForm = {
     name: string;
     email: string;
+    bio: string;
 }
 
 export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: boolean; status?: string }) {
@@ -30,6 +31,7 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm<Required<ProfileForm>>({
         name: auth.user.name,
         email: auth.user.email,
+        bio: auth.user.bio,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -118,6 +120,25 @@ export default function Profile({ mustVerifyEmail, status }: { mustVerifyEmail: 
                             </Transition>
                         </div>
                     </form>
+                    {/* <Label>Imagem de Perfil</Label> */}
+                    {/* TODO: permitir adicionar foto de perfil */}
+
+                    <Label>Biografia</Label>
+                    <Input
+                        id="bio"
+                        className="mt-1 block w-full"
+                        value={data.bio}
+                        onChange={(e) => setData('bio', e.target.value)}
+                        required
+                        autoComplete="bio"
+                        placeholder="Biografia"
+                    />
+                    <Label>Curso</Label>
+                    <Label>Ano de graduação</Label>
+                    <Label>Empresa atual</Label>
+                    <Label>Empresa atual</Label>
+                    <Label>LinkedIn</Label>
+
                 </div>
 
                 <DeleteUser />

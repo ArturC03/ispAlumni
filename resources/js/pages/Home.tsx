@@ -236,13 +236,16 @@ export default function Home({ posts }: Props) {
     }
 
     function handleComment(e: React.MouseEvent, postId: number) {
+        router.visit(route('posts.show', postId));
         e.stopPropagation();
         // Implementação do modal/form de comentário
         console.log('Comment:', postId);
     }
 
+    // TODO: Copy the post url
     function handleShare(e: React.MouseEvent, postId: number) {
         e.stopPropagation();
+        navigator.clipboard.writeText(route('posts.show', postId));
         // Implementação da funcionalidade de partilha
         console.log('Share:', postId);
     }
@@ -537,12 +540,12 @@ export default function Home({ posts }: Props) {
                     ) : (
                         posts.data.map((post) => (
                             <Card
-                                onClick={() => handlePostClick(post.id)}
+                                onDoubleClick={() => handlePostClick(post.id)}
                                 key={post.id}
-                                className="hover:bg-primary/5 rounded-xl border shadow-sm transition-all duration-200"
+                                className="max-h-content hover:bg-primary/5 rounded-xl border shadow-sm transition-all duration-200"
                             >
                                 <CardContent
-                                    className={`p-2 ${collapsedPosts.includes(post.id) ? 'max-h-[800px] overflow-hidden' : ''} sm:px-6`}
+                                    className={`p-2 ${collapsedPosts.includes(post.id) ? 'overflow-hidden' : ''} sm:px-6`}
                                     ref={(el) => {
                                         postRefs.current[post.id] = el;
                                     }}
@@ -592,7 +595,7 @@ export default function Home({ posts }: Props) {
                                                         {post.media.map((media) => (
                                                             <div
                                                                 key={media.id}
-                                                                className="relative aspect-square cursor-pointer overflow-hidden rounded-xl border"
+                                                                className="max-w-20 relative aspect-square cursor-pointer overflow-hidden rounded-xl border"
                                                                 onClick={(e) => handleMediaClick(e, media)}
                                                             >
                                                                 {media.type === 'image' ? (
@@ -603,11 +606,13 @@ export default function Home({ posts }: Props) {
                                                                         onLoad={() => handleMediaLoad(post.id)}
                                                                     />
                                                                 ) : (
+                                                                    // TODO: Show thumbnail insted of video
                                                                     <video
                                                                         src={`/storage/${media.url}`}
                                                                         controls
                                                                         className="h-full w-full object-cover"
                                                                         onLoadedMetadata={() => handleMediaLoad(post.id)}
+                                                                        enabled="false"
                                                                     />
                                                                 )}
                                                             </div>
