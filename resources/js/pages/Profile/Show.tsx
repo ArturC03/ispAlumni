@@ -179,7 +179,7 @@ export default function ProfileShow({ user, posts, friendshipStatus }: Props) {
                         <Button
                             size="sm"
                             variant="outline"
-                            className="absolute right-4 top-4 bg-white/80"
+                            className="absolute border-transparent right-4 top-4 bg-white"
                             onClick={() => router.get(route('profile.edit'))}
                         >
                             <Edit3 className="mr-2 h-4 w-4" />
@@ -210,7 +210,7 @@ export default function ProfileShow({ user, posts, friendshipStatus }: Props) {
                                     </div>
                                     <div className="flex items-center gap-1">
                                         <CalendarDays className="h-4 w-4" />
-                                        <span>Membro desde {format(new Date(user.created_at), "MMMM 'de' yyyy", { locale: pt })}</span>
+                                        <span>Alumni desde {format(new Date(user.created_at), "MMMM 'de' yyyy", { locale: pt })}</span>
                                     </div>
                                 </div>
                             </div>

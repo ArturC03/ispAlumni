@@ -128,7 +128,7 @@ export default function EventsIndex({ events, filter }: Props) {
                                 >
                                     <div className="md:flex">
                                         {event.image_url && (
-                                            <div className="relative h-48 md:h-auto md:w-1/3 overflow-hidden">
+                                            <div className="relative h-54 max-h-54 md:h-auto md:w-1/3 overflow-hidden">
                                                 <img
                                                     src={`/storage/${event.image_url}`}
                                                     alt={event.title}
